@@ -6,10 +6,9 @@ const academicSemesterApi = baseApi.injectEndpoints({
             query: () => ({
                 url: "/academic-semesters",
                 method: "GET",
-
             })
         })
     })
 })
 
-export const { useGetAllSemestersQuery } = academicSemesterApi;
+export const { useGetAllSemestersQuery } = academicSemesterApi
