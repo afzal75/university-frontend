@@ -13,7 +13,7 @@ const CreateAcademicFaculty = () => {
 
 
 
-    const handleSubmit = async (data) => {
+    const handleSubmit = async (data: { name: string; }) => {
         const toastId = toast.loading("Creating.....")
         const addAcademicFacultyData = {
             name: data.name
