@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, SubmitErrorHandler } from "react-hook-form";
 import PHForms from "../../../components/form/PHForms";
 import { Button, Col, Flex } from "antd";
@@ -17,7 +18,7 @@ const SemesterRegistration = () => {
 
     const [addSemesterRegistration] = useAddRegisteredSemesterMutation()
 
-    const { data: academicSemester, isLoading } = useGetAllSemestersQuery([
+    const { data: academicSemester } = useGetAllSemestersQuery([
         { name: "sort", value: "year" }
     ])
     console.log(academicSemester)
