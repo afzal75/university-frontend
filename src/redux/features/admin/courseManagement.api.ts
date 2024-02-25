@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { TQueryParam, TResponseRedux, TSemester } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
@@ -59,6 +60,14 @@ const courseManagementApi = baseApi.injectEndpoints({
             }),
             invalidatesTags: ["semester"]
         }),
+        createOfferedCourse: builder.mutation({
+            query: (data) => ({
+                url: '/offered-courses/create-offered-course',
+                method: 'POST',
+                body: data,
+            }),
+            // invalidatesTags: ["semester"]
+        }),
         addFaculties: builder.mutation({
             query: (args) => ({
                 url: `/courses/${args.courseId}/assign-faculties`,
@@ -66,6 +75,20 @@ const courseManagementApi = baseApi.injectEndpoints({
                 body: args.data,
             }),
             invalidatesTags: ["semester"]
+        }),
+        getCourseFaculties: builder.query({
+            query: (id) => {
+                return {
+                    url: `/courses/${id}/get-faculties`,
+                    method: 'GET',
+                };
+            },
+            transformResponse: (response: TResponseRedux<any>) => {
+                return {
+                    data: response.data,
+                    meta: response.meta,
+                };
+            },
         }),
         addRegisteredSemester: builder.mutation({
             query: (data) => ({
@@ -92,5 +115,7 @@ export const {
     useUpdateRegisteredSemesterMutation,
     useGetAllCoursesQuery,
     useAddCoursesMutation,
-    useAddFacultiesMutation
+    useAddFacultiesMutation,
+    useGetCourseFacultiesQuery,
+    useCreateOfferedCourseMutation
 } = courseManagementApi
