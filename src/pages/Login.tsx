@@ -20,8 +20,8 @@ const Login = () => {
     // })
 
     const defaultValues = {
-        userId: "A-0001",
-        password: "admin123"
+        userId: "2032030001",
+        password: "student123"
     }
 
 
@@ -41,7 +41,12 @@ const Login = () => {
             const user = verifyToken(res.data.accessToken) as TUser;
             dispatch(setUser({ user: user, token: res.data.accessToken }))
             toast.success("Logged in successfully", { id: toastId, duration: 2000 })
-            navigate(`/${user.role}/dashboard`)
+            if (res.data.needsPasswordChange) {
+                navigate(`/change-password`)
+            }
+            else {
+                navigate(`/${user.role}/dashboard`)
+            }
         }
         catch (err) {
             toast.error("Something went wrong", { id: toastId, duration: 2000 })
